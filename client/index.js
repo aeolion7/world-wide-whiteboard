@@ -6,13 +6,13 @@ import whiteboard, { draw } from './whiteboard';
 // Example: Draw a single stroke.
 draw([0, 0], [250, 250], 'red', true);
 
-whiteboard.on('draw', payload => {
-  console.log(payload);
-});
-
 // the window.location object describes the URL of the current page
 const socket = io(window.location.origin);
 
 socket.on('connect', () => {
   console.log('Persistent two-way server connection established');
+});
+
+whiteboard.on('draw', payload => {
+  whiteboard.emit(payload);
 });

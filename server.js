@@ -15,6 +15,11 @@ io.on('connection', socket => {
   console.log('A new client has connected!');
   let userId = socket.id;
   console.log(userId);
+
+  socket.on('draw', payload => {
+    console.log(payload);
+  });
+
   socket.on('disconnect', () => {
     console.log('Goodbye :(');
     console.log(userId + ' disconnected');
