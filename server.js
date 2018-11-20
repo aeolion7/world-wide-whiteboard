@@ -16,15 +16,16 @@ io.on('connection', socket => {
   let userId = socket.id;
   console.log(userId);
 
-  socket.on('draw', payload => {
-    console.log(payload);
-  });
-
   socket.on('disconnect', () => {
     console.log('Goodbye :(');
     console.log(userId + ' disconnected');
   });
-});
 
+  // 2
+  socket.on('drawing', function (...args ) {
+    socket.broadcast.emit('broadcast', ...args);
+    console.log(...args);
+  });
+});
 
 app.use(express.static(path.join(__dirname, 'public')));

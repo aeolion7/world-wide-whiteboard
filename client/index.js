@@ -13,6 +13,12 @@ socket.on('connect', () => {
   console.log('Persistent two-way server connection established');
 });
 
-whiteboard.on('draw', payload => {
-  whiteboard.emit(payload);
+// 1. send to server
+whiteboard.on('draw', function (...args) {
+  socket.emit('drawing', ...args);
+});
+
+// 3. draw
+socket.on('broadcast', function (...args) {
+  draw(...args);
 });
